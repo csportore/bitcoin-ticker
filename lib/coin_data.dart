@@ -1,3 +1,6 @@
+import 'package:bitcoin_ticker/network.dart';
+import 'package:bitcoin_ticker/constants.dart' as Constants;
+
 const List<String> currenciesList = [
   'AUD',
   'BRL',
@@ -28,4 +31,15 @@ const List<String> cryptoList = [
   'LTC',
 ];
 
-class CoinData {}
+class CoinData {
+  Future<List<dynamic>> getCoinData(String currencyCode) async {
+    NetworkHelper networkHelper = NetworkHelper(
+      apiURL: Constants.coinURL,
+      apiKey: Constants.coinApiKey,
+    );
+
+    List<dynamic> coinsData = await networkHelper.getData(currencyCode);
+
+    return coinsData;
+  }
+}
